@@ -10,6 +10,8 @@ class App extends Component {
     input: ""
   }
 
+
+  
   inputFieldChangedHandler = (event) => {
     this.setState({
       inputLength: event.target.value.length,
