@@ -9,8 +9,6 @@ class App extends Component {
     inputLength: 0,
     input: ""
   }
-
-
   
   inputFieldChangedHandler = (event) => {
     this.setState({

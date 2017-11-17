@@ -2,7 +2,7 @@ import React from 'react';
 
 const validationComponent = (props) => {
 
-    var inputLength = props.inputLength;
+    let inputLength = props.inputLength;
     let validationResult = null;
 
     if(inputLength <=5) {
