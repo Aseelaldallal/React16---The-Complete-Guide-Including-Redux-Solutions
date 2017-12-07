@@ -1,0 +1,1 @@
+Simple blog app with dummy data
