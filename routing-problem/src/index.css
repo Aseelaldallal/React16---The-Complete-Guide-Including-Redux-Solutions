@@ -4,3 +4,20 @@ body {
   font-family: sans-serif;
   text-align: center;
 }
+
+
+nav {
+  margin: 0 auto;
+  border: 2px solid black;
+  text-align: center;
+  padding: 2rem;
+}
+
+nav > * {
+  margin: auto 2rem;
+}
+
+.Selected {
+  color: red;
+  font-weight: bold;
+}
