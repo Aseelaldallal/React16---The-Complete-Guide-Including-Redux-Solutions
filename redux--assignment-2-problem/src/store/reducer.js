@@ -5,8 +5,9 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
-    switch(action) {
+    switch(action.type) {
         case actionTypes.ADD_PERSON:
+            console.log("IN HERE");
             const newPerson = {
                 id: Math.random(), 
                 name: 'Max',
@@ -14,7 +15,8 @@ const reducer = (state = initialState, action) => {
             }
             return { persons: state.persons.concat(newPerson) };
         case actionTypes.REMOVE_PERSON:
-            return;
+            const updatedPersons = state.persons.filter(person => person.id !== action.id);
+            return { persons: updatedPersons};
         default:
             return state;
     }
@@ -22,12 +24,3 @@ const reducer = (state = initialState, action) => {
 
 export default reducer;
 
-
-
-
-personAddedHandler = () => {
-
-    this.setState( ( prevState ) => {
-        return { persons: prevState.persons.concat(newPerson)}
-    } );
-}
