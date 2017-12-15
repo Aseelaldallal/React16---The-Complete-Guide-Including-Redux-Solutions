@@ -1,0 +1,95 @@
+
+
+1. Create store in index.js:
+
+import {createStore} from 'redux';
+const store = createStore();
+
+Store takes a reducer as input. Store reducer logic into its own file.
+
+2. Create Store Folder
+3. Create reducer.js file in Store folder
+
+const initialState = {
+    counter: 0
+}
+
+const reducer = (state = initialState, action) => {
+    return state;
+}
+
+export default reducer;
+
+4. Import reducer into index.js and pass it to createstore
+
+5. Connect store to react application: 
+- npm install 'react-redux'
+- import { Provider } from 'react-redux'
+- wrap app with provider: <Provider store={store}> <App /> </Provider>
+
+6. Go to container and add import { connect } from 'react-redux';
+Connect is a function that returns a higher order function that you can pass the component to.
+
+7. export default connect()(Counter); 
+In connect, we pass two pieces of info: which part of the application state is important to us in
+this container, and which actions do I want to dispatch
+
+8. Add function
+const mapStateToProps = (state) =>  {
+    return {
+        ctr: state.counter
+    };
+}
+and pass it to connect.
+export default connect(mapStateToProps)(Counter);
+Now connect gives us the Counter container with access to ctr property
+
+9. Now dispatch actions in the container
+const mapDispatchToProps = dispatch => {
+    return {
+        onIncrementCounter: () => dispatch({type: 'INCREMENT'}),
+        onDecrementCounter: () => dispatch({type: 'DECREMENT'}),
+        onAddCounter: () => dispatch({type: 'ADD', value: 5 }),
+        onSubtractCounter: () => dispatch({type: 'SUBTRACT', value: 5})
+    }
+}
+'react-redux' is giving us the dispatch function
+
+10. Change connect method to
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+
+11. Make sure you implement the logic in reducer.js
+const reducer = (state = initialState, action) => {
+    switch (action.type) {
+        case 'INCREMENT':
+            return { counter: state.counter + 1};
+        case 'DECREMENT':
+            return { counter: state.counter -1};
+        case 'ADD':
+            return { counter: state.counter + action.value};
+        case 'SUBTRACT':
+            return { counter: state.counter + action.value};
+        default:
+            return state; // THIS IS IMPORTANT -- otherwise application breaks
+    }
+}
+
+12. Combining Multiple Reducers
+In Store folder, create reducers folder
+then in index.js 
+import counterReducer from './store/reducers/counter';
+import resultReducer from './store/reducers/results';
+import {createStore, combineReducers} from 'redux';
+const rootReducer = combineReducers({
+    ctr: counterReducer,
+    res: resultReducer
+}) // merge everything into one reducer
+const store = createStore(rootReducer);
+Then adjust
+const mapStateToProps = (state) =>  {
+    return {
+        ctr: state.ctr.counter,
+        results: state.res.results
+    };
+}
+But now you must connect the reducer, if you need value from global state, you get it as an action (payload)
