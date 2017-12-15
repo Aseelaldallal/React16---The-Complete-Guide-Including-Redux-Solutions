@@ -1,7 +1,10 @@
+// React
 import React, { Component } from 'react';
-
+// Components
 import Person from '../components/Person/Person';
 import AddPerson from '../components/AddPerson/AddPerson';
+// Redux
+import { connect } from 'react-redux';
 
 class Persons extends Component {
     state = {
@@ -41,4 +44,12 @@ class Persons extends Component {
     }
 }
 
-export default Persons;
+
+
+const mapStateToProps = (state) =>  {
+}
+
+const mapDispatchToProps = dispatch => {
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Persons); 
