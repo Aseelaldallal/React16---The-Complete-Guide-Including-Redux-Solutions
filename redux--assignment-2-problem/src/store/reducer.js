@@ -7,7 +7,6 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch(action.type) {
         case actionTypes.ADD_PERSON:
-            console.log("IN HERE");
             const newPerson = {
                 id: Math.random(), 
                 name: 'Max',
